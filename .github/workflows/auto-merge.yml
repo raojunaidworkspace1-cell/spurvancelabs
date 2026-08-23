@@ -1,0 +1,11 @@
+name: Auto Merge PR
+on:
+  workflow_dispatch:
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: gh pr merge 24 --auto --squash
+        env:
+          GH_TOKEN: \${{ secrets.GITHUB_TOKEN }}
