@@ -3,174 +3,566 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEBSITE HACKED - CYBER ATTACK</title>
+  <title>SECURITY BREACH — Spurvancelabs.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --card: #12121a;
+      --border: #1e1e2e;
+      --red: #ff3b3b;
+      --orange: #ff6b35;
+      --green: #00ff88;
+      --cyan: #00d4ff;
+      --purple: #a855f7;
+      --text: #e4e4e7;
+      --muted: #71717a;
     }
+
     html, body {
       height: 100%;
-      width: 100%;
-      overflow: hidden;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: #0a0a0a;
-      color: #ff0000;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
-    .container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
+
+    /* Animated Background */
+    .bg-grid {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        linear-gradient(rgba(255,59,59,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,59,59,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 0;
+      animation: gridMove 20s linear infinite;
     }
-    .warning-icon {
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .glow-orb {
+      position: fixed;
+      width: 600px;
+      height: 600px;
       border-radius: 50%;
+      filter: blur(150px);
+      opacity: 0.15;
+      z-index: 0;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .glow-orb.red { background: var(--red); top: -200px; right: -200px; }
+    .glow-orb.orange { background: var(--orange); bottom: -200px; left: -200px; animation-delay: -4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, 30px) scale(1.1); }
+    }
+
+    /* Scanline Effect */
+    .scanline {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .scan-beam {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      z-index: 999;
+      animation: scan 4s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes scan {
+      0% { top: -3px; }
+      100% { top: 100%; }
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      margin: 0 auto 30px;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Skull Animation */
+    .skull-container {
       position: relative;
-      box-shadow: 0 0 50px #ff0000, inset 0 0 100px #ff0000;
+      width: 140px;
+      height: 140px;
+      margin-bottom: 40px;
     }
-    .warning-icon::before {
-      content: '💀';
-      font-size: 80px;
-      filter: drop-shadow(0 0 20px #ff0000);
-    }
-    .warning-icon::after {
-      content: 'HACKED';
+
+    .skull-ring {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #000;
-      font-size: 24px;
-      font-weight: bold;
-      text-shadow: 1px 1px 0 #fff;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 2px solid var(--red);
+      border-radius: 50%;
+      animation: rotate 6s linear infinite;
+      border-top-color: transparent;
+      border-left-color: transparent;
     }
+
+    .skull-ring:nth-child(2) {
+      width: 120px; height: 120px;
+      top: 10px; left: 10px;
+      border-color: var(--orange);
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      animation: rotate 4s linear infinite reverse;
+    }
+
+    .skull-icon {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 56px;
+      filter: drop-shadow(0 0 30px rgba(255,59,59,0.5));
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes rotate { 100% { transform: rotate(360deg); } }
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.15); }
+    }
+
+    /* Status Badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(255,59,59,0.1);
+      border: 1px solid rgba(255,59,59,0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--red);
+      margin-bottom: 24px;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Main Title */
     h1 {
-      font-size: 48px;
-      margin: 20px 0 10px;
-      background: linear-gradient(135deg, #ff0000, #ff6600);
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+    }
+
+    h1 .white { color: #fff; }
+    h1 .gradient {
+      background: linear-gradient(135deg, var(--red), var(--orange), #ff0066);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 48px;
+      font-weight: 400;
+      max-width: 500px;
+    }
+
+    /* Info Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(255,59,59,0.1);
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .card-label {
+      font-size: 12px;
+      color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 4px;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
     }
-    .hackers {
-      font-size: 24px;
-      margin: 10px 0 30px;
-      color: #ff6600;
-      font-weight: bold;
+
+    .card-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-value.red { color: var(--red); }
+    .card-value.green { color: var(--green); }
+    .card-value.cyan { color: var(--cyan); }
+
+    /* Terminal */
+    .terminal {
+      width: 100%;
+      max-width: 700px;
+      background: #0d0d12;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: #16161e;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ff5f57; }
+    .terminal-dot.yellow { background: #febc2e; }
+    .terminal-dot.green { background: #28c840; }
+
+    .terminal-title {
+      margin-left: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .terminal-body {
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--green);
+    }
+
+    .terminal-body .prompt { color: var(--cyan); }
+    .terminal-body .cmd { color: var(--text); }
+    .terminal-body .output { color: var(--muted); }
+    .terminal-body .error { color: var(--red); }
+    .terminal-body .highlight { color: var(--orange); }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: var(--green);
+      animation: cursorBlink 1s step-end infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Credit Section */
+    .credit {
+      text-align: center;
+      padding: 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .credit::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--purple), var(--cyan));
+    }
+
+    .credit-label {
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      margin-bottom: 12px;
     }
-    .message {
-      font-size: 18px;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 20px 0;
-      color: #cccccc;
+
+    .credit-name {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
     }
-    .access-denied {
-      background: #1a1a1a;
-      padding: 20px 40px;
-      margin: 30px 0;
-      border: 2px solid #ff0000;
-      border-radius: 5px;
+
+    .credit-role {
       font-size: 14px;
-      color: #ff0000;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      color: var(--muted);
     }
-    .countdown {
-      font-size: 20px;
-      margin: 20px 0;
-      color: #ff0000;
-      font-weight: bold;
+
+    .credit-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
     }
+
+    .credit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(255,59,59,0.1);
+      border: 1px solid rgba(255,59,59,0.2);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+
+    .credit-link:hover {
+      background: rgba(255,59,59,0.2);
+      border-color: var(--red);
+    }
+
+    /* Credits Wrapper */
+    .credits-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      max-width: 900px;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .credit-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 30px rgba(255,107,53,0.3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .credit-name.orange {
+      background: linear-gradient(135deg, var(--orange), #ff0066);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Footer */
     .footer {
-      margin-top: 40px;
-      color: #666666;
+      margin-top: 48px;
+      text-align: center;
+      color: var(--muted);
       font-size: 12px;
     }
-    .btn {
-      padding: 15px 30px;
-      background: #ff0000;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      margin: 20px;
-      transition: background 0.3s;
+
+    .footer span { color: var(--red); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      .container { padding: 24px 16px; }
     }
-    .btn:hover {
-      background: #cc0000;
+
+    /* Typing Animation */
+    .typing {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--green);
+      animation: typing 3s steps(30) 1s forwards, blinkCaret 0.75s step-end infinite;
+      width: 0;
     }
-    .link {
-      color: #ff6600;
-      text-decoration: underline;
-      font-size: 14px;
-    }
+
+    @keyframes typing { to { width: 100%; } }
+    @keyframes blinkCaret { 50% { border-color: transparent; } }
   </style>
 </head>
 <body>
+  <div class="bg-grid"></div>
+  <div class="glow-orb red"></div>
+  <div class="glow-orb orange"></div>
+  <div class="scanline"></div>
+  <div class="scan-beam"></div>
+
   <div class="container">
-    <div class="warning-icon"></div>
-    <h1>WEBSITE SECURITY BREACH</h1>
-    <div class="hackers">Hacked by Muhammad Abdullah & Roa Juniad</div>
-    <p class="message">Unauthorized access detected. All systems compromised. This website has been taken over by external parties. Do not attempt to access any other sections as they have been secured by the hackers.</p>
-    
-    <div class="access-denied">ACCESS DENIED - All other pages and sections are restricted</div>
-    
-    <div class="countdown" id="countdown">Redirecting in 10 seconds...</div>
-    
-    <button class="btn" onclick="window.location='/'">Exit Hack Page</button>
-    <a class="link" href="/">Return to Main (If Available)</a>
-    
+    <!-- Skull Animation -->
+    <div class="skull-container">
+      <div class="skull-ring"></div>
+      <div class="skull-ring"></div>
+      <div class="skull-icon">💀</div>
+    </div>
+
+    <!-- Status Badge -->
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      Security Breach Detected
+    </div>
+
+    <!-- Title -->
+    <h1>
+      <span class="white">WEBSITE</span><br>
+      <span class="gradient">COMPROMISED</span>
+    </h1>
+
+    <p class="subtitle">All systems have been breached. Security protocols failed. This domain is now under new management.</p>
+
+    <!-- Info Cards -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-label">Target</div>
+        <div class="card-value">spurvancelabs.com</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔓</div>
+        <div class="card-label">Access Level</div>
+        <div class="card-value red">GOD MODE</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗄️</div>
+        <div class="card-label">Database</div>
+        <div class="card-value green">FULLY OWNED</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👑</div>
+        <div class="card-label">Admin Panel</div>
+        <div class="card-value cyan">SUPER_ADMIN</div>
+      </div>
+    </div>
+
+    <!-- Terminal -->
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <span class="terminal-title">root@spurvancelabs ~ #</span>
+      </div>
+      <div class="terminal-body">
+        <span class="prompt">$</span> <span class="cmd">nmap -sV --script=vuln spurvancelabs.com</span><br>
+        <span class="output">Starting Nmap scan...</span><br>
+        <span class="output">PORT     STATE  SERVICE</span><br>
+        <span class="output">443/tcp  open   https</span><br><br>
+
+        <span class="prompt">$</span> <span class="cmd">curl -X POST spurvancelabs.com/api/auth/login</span><br>
+        <span class="highlight">✓ Admin access obtained: SUPER_ADMIN</span><br><br>
+
+        <span class="prompt">$</span> <span class="cmd">supabase db dump --all-tables</span><br>
+        <span class="highlight">✓ 15 tables | 100+ records | All data exfiltrated</span><br><br>
+
+        <span class="prompt">$</span> <span class="cmd">echo "Who owns this?"</span><br>
+        <span class="error">⚠ RAO JUNAID & MUHAMMAD ABDULLAH<span class="cursor"></span></span>
+      </div>
+    </div>
+
+    <!-- Credits -->
+    <div class="credit">
+      <div class="credit-label">Hacked By Both</div>
+      <div class="credit-name">RAO JUNAID & MUHAMMAD ABDULLAH</div>
+      <div class="credit-role">Black Hat Hackers • Security Researchers • Pentesters</div>
+      <div class="credit-links">
+        <a href="https://github.com/raojunaid" class="credit-link" target="_blank">
+          🐙 GitHub
+        </a>
+        <a href="mailto:raojunaid@proton.me" class="credit-link">
+          📧 Contact
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
     <div class="footer">
-      © 2026 All rights reserved. Website temporarily under maintenance by Muhammad Abdullah & Roa Juniad
+      © 2026 <span>Rao Junaid & Muhammad Abdullah</span> — All rights reserved. Site under maintenance.
     </div>
   </div>
 
   <script>
-    const seconds = 10;
-    const el = document.getElementById('countdown');
-    
-    let remaining = seconds;
-    el.textContent = `Redirecting in ${remaining} seconds...`;
-    
-    const interval = setInterval(() => {
-      remaining--;
-      el.textContent = `Redirecting in ${remaining} seconds...`;
-      if (remaining <= 0) {
-        clearInterval(interval);
-        el.textContent = 'Access denied - this page only';
-      }
-    }, 1000);
-    
-    // Prevent navigation away
-    document.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        // Only allow exit button
-        if (a.textContent.includes('Exit') || a.getAttribute('href') === '/') {
-          window.location.href = a.getAttribute('href') || '/';
-        }
-      });
-    });
+    // Random glitch effect
+    setInterval(() => {
+      document.body.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
+      setTimeout(() => { document.body.style.transform = 'translate(0, 0)'; }, 50);
+    }, 5000);
+
+    // Console Easter Egg
+    console.log('%c💀 WEBSITE HACKED BY RAO JUNAID & MUHAMMAD ABDULLAH', 'color: #ff3b3b; font-size: 24px; font-weight: bold;');
+    console.log('%cAll systems compromised.', 'color: #71717a; font-size: 14px;');
   </script>
 </body>
 </html>
